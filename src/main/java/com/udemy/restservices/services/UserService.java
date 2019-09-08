@@ -50,7 +50,7 @@ public class UserService {
 			throw new UserNotFoundException("User Not Found, provide the correct user id");
 		}
 		
-		user.setId(id);
+		user.setUserId(id);
 		return this.userRepository.save(user);
 	}
 	

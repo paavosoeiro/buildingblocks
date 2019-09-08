@@ -11,13 +11,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.ResourceSupport;
+
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends ResourceSupport{
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long userid;
 
 	@NotEmpty(message = "Username is mandatory. Please provide username")
 	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
@@ -41,17 +43,32 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders;
-	
+
 	public User() {
 	}
-	
+
 	public User(String firstName) {
 		this.firstName = firstName;
 	}
 
-	public User(Long id, String userName, String firstName, String lastName, String email, String role, String ssn) {
+	public User(Long userid, @NotEmpty(message = "Username is mandatory. Please provide username") String userName,
+			@Size(min = 2, message = "FirstName should have at least 2 characters") String firstName, String lastName,
+			String email, String role, String ssn, List<Order> orders) {
 		super();
-		this.id = id;
+		this.userid = userid;
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.role = role;
+		this.ssn = ssn;
+		this.orders = orders;
+	}
+
+	public User(Long userid, @NotEmpty(message = "Username is mandatory. Please provide username") String userName,
+			@Size(min = 2, message = "FirstName should have at least 2 characters") String firstName, String lastName,
+			String email, String role, String ssn) {
+		this.userid = userid;
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -60,12 +77,12 @@ public class User {
 		this.ssn = ssn;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userid;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userid = userId;
 	}
 
 	public String getUserName() {
@@ -116,7 +133,6 @@ public class User {
 		this.ssn = ssn;
 	}
 
-		
 	public List<Order> getOrders() {
 		return orders;
 	}
@@ -127,8 +143,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
+		return "User [userId=" + userid + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders + "]";
 	}
 
 }
