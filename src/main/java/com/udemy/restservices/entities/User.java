@@ -2,6 +2,7 @@ package com.udemy.restservices.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
@@ -31,6 +33,10 @@ public class User {
 	private String ssn;
 
 	public User() {
+	}
+	
+	public User(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public User(Long id, String userName, String firstName, String lastName, String email, String role, String ssn) {

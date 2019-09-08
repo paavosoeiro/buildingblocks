@@ -24,7 +24,6 @@ public class HelloWorldControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-
 	@Test
 	public void testHelloWorld() throws Exception {
 		mockMvc.perform(get("/helloworld")).andExpect(status().isOk());
