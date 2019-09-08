@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.udemy.restservices.entities.User;
+import com.udemy.restservices.exceptions.UserExistsException;
 import com.udemy.restservices.repositories.UserRepository;
 
 @RunWith(SpringRunner.class)
@@ -44,7 +45,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void testCreateUser() {
+	public void testCreateUser() throws UserExistsException {
 		assertThat(userService.createUser(new User()).getFirstName(), is(equalTo("Paavo")));
 	}
 

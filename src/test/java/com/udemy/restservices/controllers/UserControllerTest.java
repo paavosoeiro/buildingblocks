@@ -56,7 +56,7 @@ public class UserControllerTest {
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(objectMapper.writeValueAsString(
 						new User(1L, "paavo", "Paavo", "Silva", "paavo@silva.com", "admin", "ssn001"))))
-		.andExpect(status().isOk());
+		.andExpect(status().isCreated());
 	}
 
 }
